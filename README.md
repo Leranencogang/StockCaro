@@ -1,4 +1,6 @@
-
+<p align="center">
+  <img src="benchmark.png" alt="StockCaro Benchmark" width="800">
+</p>
 
 <img width="1280" height="640" alt="converted_image" src="https://github.com/user-attachments/assets/b164a70c-68b1-4e7b-8592-30a36dfbc25a" />
 
