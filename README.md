@@ -1,38 +1,17 @@
-# 🎮 Stockaro AI Gomoku
+# 🎮 Stockcaro AI Gomoku
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                                                                             │
-│   ███████╗████████╗ ██████╗  ██████╗██╗  ██╗ █████╗ ██████╗  ██████╗        │
-│   ██╔════╝╚══██╔══╝██╔═══██╗██╔════╝██║ ██╔╝██╔══██╗██╔══██╗██╔═══██╗       │
-│   ███████╗   ██║   ██║   ██║██║     █████╔╝ ███████║██████╔╝██║   ██║       │
-│   ╚════██║   ██║   ██║   ██║██║     ██╔═██╗ ██╔══██║██╔══██╗██║   ██║       │
-│   ███████║   ██║   ╚██████╔╝╚██████╗██║  ██╗██║  ██║██║  ██║╚██████╔╝       │
-│   ╚══════╝   ╚═╝    ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝        │
-│                                                                             │
-│   A High-Performance Gomoku (Caro) AI Engine & Responsive Web Dashboard     │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-Stockaro is a state-of-the-art Gomoku (Caro) AI engine written in C++17, wrapped in a lightweight Node.js Express server, and styled with a sleek glassmorphic HTML5 frontend. It features an advanced alpha-beta search with PVS (Principal Variation Search), transposition tables, iterative deepening, dynamic move-list pruning, a dynamic Elo rating progression profile, and configurable skill tiers.
+Stockcaro is a high-performance Gomoku (Caro) AI engine written in C++17, wrapped in a lightweight Node.js Express server, and styled with a sleek glassmorphic HTML5 frontend. It features an advanced alpha-beta search with PVS (Principal Variation Search), transposition tables, iterative deepening, dynamic move-list pruning, a dynamic Elo rating progression profile, and configurable skill tiers.
 
 ---
 
 ## 📁 Project Architecture & Components
 
-┌──────────────────────────────┬─────────────────────────────────────────────────────────────────────────────┐
-│ File / Folder                │ Technical Purpose                                                           │
-├──────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┤
-│ 📂 `src/`                    │ Core C++17 AI Engine code. Handles move generation, pruning, PVS search,   │
-│                              │ transposition tables, history tables, and evaluation metrics.               │
-│ 📂 `public/`                 │ Responsive web UI containing 3D glossy game pieces, a live evaluation bar, │
-│                              │ difficulty controls, and a persistent local Elo profile dashboard.          │
-│ 📄 `server.js`               │ Node.js Express server acting as a bridge communicating JSON payloads from │
-│                              │ the web client to the C++ engine executable.                                │
-│ 📄 `setup.sh`                │ Automated shell script that resolves compiler packages, fetches Node,       │
-│                              │ builds the optimized binary, runs unit benchmarks, and starts the server.    │
-│ 📄 `Makefile`                │ Compilation commands targeting native performance using GCC `-O3` flags.    │
-│ 📄 `weights.txt`             │ Hyperparameters defining positional rewards and threat patterns.            │
-└──────────────────────────────┴─────────────────────────────────────────────────────────────────────────────┘
+* **`src/`**: Core C++17 AI Engine code. Handles move generation, pruning, PVS search, transposition tables, history tables, and evaluation metrics.
+* **`public/`**: Responsive web UI containing 3D glossy game pieces, a live evaluation bar, difficulty controls, and a persistent local Elo profile dashboard.
+* **`server.js`**: Node.js Express server acting as a bridge communicating JSON payloads from the web client to the C++ engine executable.
+* **`setup.sh`**: Automated shell script that resolves compiler packages, fetches Node, builds the optimized binary, runs unit benchmarks, and starts the server.
+* **`Makefile`**: Compilation commands targeting native performance using GCC `-O3` flags.
+* **`weights.txt`**: Hyperparameters defining positional rewards and threat patterns.
 
 ---
 
@@ -62,17 +41,15 @@ For developers desiring custom build actions:
 
 ## 🧠 AI Difficulty & Skill Tiers
 
-Stockaro supports five difficulty settings, adjusting search depth and time budgets sent directly to the C++ engine:
+Stockcaro supports five difficulty settings, adjusting search depth and time budgets sent directly to the C++ engine:
 
-┌───────────┬─────────────┬──────────────┬───────────────────────────────────────────────────────────────────┐
-│ Skill     │ C++ Depth   │ Time Limit   │ Estimated Elo rating                                              │
-├───────────┼─────────────┼──────────────┼───────────────────────────────────────────────────────────────────┤
-│ **Easy**  │ 2 plies     │ 50 ms        │ `1000` (Fast tactical checks, suitable for absolute beginners)     │
-│ **Medium**│ 4 plies     │ 150 ms       │ `1400` (Basic lookahead, defends single-step threat lines)        │
-│ **Hard**  │ 6 plies     │ 450 ms       │ `1800` (Challenging level, constructs simple split attacks)       │
-│ **Expert**│ 9 plies     │ 1200 ms      │ `2200` (Advanced tactical foresight, prevents double-threes)       │
-│ **Master**│ 14 plies    │ 3000 ms      │ `2500` (Grandmaster level, deep transposition exploration)         │
-└───────────┴─────────────┴──────────────┴───────────────────────────────────────────────────────────────────┘
+| Skill | C++ Depth | Time Limit | Estimated Elo Rating |
+|---|---|---|---|
+| **Easy** | 2 plies | 50 ms | `1000` (Fast tactical checks, suitable for absolute beginners) |
+| **Medium** | 4 plies | 150 ms | `1400` (Basic lookahead, defends single-step threat lines) |
+| **Hard** | 6 plies | 450 ms | `1800` (Challenging level, constructs simple split attacks) |
+| **Expert** | 9 plies | 1200 ms | `2200` (Advanced tactical foresight, prevents double-threes) |
+| **Master** | 14 plies | 3000 ms | `2500` (Grandmaster level, deep transposition exploration) |
 
 ---
 
@@ -80,7 +57,7 @@ Stockaro supports five difficulty settings, adjusting search depth and time budg
 
 The web interface features a persistent local Profile Panel. Your results are recorded directly inside your browser:
 * **Starting Rating:** `1200` (Standard baseline).
-* **Rank Tiers:** Progression moves from *Novice*, *Apprentice*, *Intermediate*, *Expert*, *Master*, *Grandmaster*, *Super Grandmaster*, and finally *Stockaro Slayer*.
+* **Rank Tiers:** Progression moves from *Novice*, *Apprentice*, *Intermediate*, *Expert*, *Master*, *Grandmaster*, *Super Grandmaster*, and finally *Stockcaro Slayer*.
 * **Formula:** Elo adjustments are calculated using standard rating change mathematics:
   
   $$\text{Expected Score } (E_A) = \frac{1}{1 + 10^{(R_{AI} - R_{\text{user}}) / 400}}$$
@@ -93,13 +70,13 @@ The web interface features a persistent local Profile Panel. Your results are re
 
 ## ⚙️ Search Engine & Algorithmic Optimizations
 
-Stockaro implements highly optimized game-playing algorithms to achieve massive search depths quickly:
+Stockcaro implements highly optimized game-playing algorithms to achieve massive search depths quickly:
 
 ### 1. Principal Variation Search (PVS)
 PVS is a high-performance variant of Alpha-Beta minimax. It assumes that the first move ordered is likely the best move (the principal variation). It searches the first move with a full window $(\alpha, \beta)$, and subsequent moves are searched with a null window $(\alpha, \alpha+1)$. A full re-search is only triggered if a late move refutes the PV.
 
 ### 2. Dynamic Search Breadth (Width Pruning)
-To prevent exponential branch explosion at deep plies, Stockaro dynamically adjusts its search breadth factor:
+To prevent exponential branch explosion at deep plies, Stockcaro dynamically adjusts its search breadth factor:
 ```cpp
 int movesToSearch = std::min(moveList.size(), depth >= 10 ? 8 : (depth >= 6 ? 12 : 18));
 ```
@@ -121,9 +98,9 @@ Moves are sorted to maximize alpha-beta cutoffs using:
 
 ## 📈 Self-Play Training (Reinforcement Learning)
 
-Stockaro contains a built-in self-play training loop that optimizes the evaluation weights:
+Stockcaro contains a built-in self-play training loop that optimizes the evaluation weights:
 ```bash
-./Stockaro --train 2>&1 | tee training.log
+./Stockcaro --train 2>&1 | tee training.log
 ```
 * **Mechanism:** The candidate model mutates a parameter in `weights.txt` by $\pm 15\%$ and plays 8 rapid matches against the current best model. If the candidate defeats the best model, it becomes the new baseline.
 * **Evaluation Metrics Optimized:**
