@@ -1,0 +1,1171 @@
+========================================
+      STOCKARO AI SELF-PLAY TRAINING    
+========================================
+Initial Weights Loaded:
+  OpenFour:     50000
+  BlockedFour:  9600
+  OpenThree:    5000
+  BlockedThree: 844
+  OpenTwo:      500
+  BlockedTwo:   100
+  SinglePiece:  8
+
+[Generation 1]
+Evaluating Candidate Weights...
+self played : 1
+self played : 2
+self played : 3
+self played : 4
+self played : 5
+self played : 6
+self played : 7
+self played : 8
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 2]
+Evaluating Candidate Weights...
+self played : 9
+self played : 10
+self played : 11
+self played : 12
+self played : 13
+self played : 14
+self played : 15
+self played : 16
+Results -> Candidate Wins: 6 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5000
+
+[Generation 3]
+Evaluating Candidate Weights...
+self played : 17
+self played : 18
+self played : 19
+self played : 20
+self played : 21
+self played : 22
+self played : 23
+self played : 24
+Results -> Candidate Wins: 6 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5000
+
+[Generation 4]
+Evaluating Candidate Weights...
+self played : 25
+self played : 26
+self played : 27
+self played : 28
+self played : 29
+self played : 30
+self played : 31
+self played : 32
+Results -> Candidate Wins: 5 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5000
+
+[Generation 5]
+Evaluating Candidate Weights...
+self played : 33
+self played : 34
+self played : 35
+self played : 36
+self played : 37
+self played : 38
+self played : 39
+self played : 40
+Results -> Candidate Wins: 1 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 6]
+Evaluating Candidate Weights...
+self played : 41
+self played : 42
+self played : 43
+self played : 44
+self played : 45
+self played : 46
+self played : 47
+self played : 48
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 7]
+Evaluating Candidate Weights...
+self played : 49
+self played : 50
+self played : 51
+self played : 52
+self played : 53
+self played : 54
+self played : 55
+self played : 56
+Results -> Candidate Wins: 2 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 8]
+Evaluating Candidate Weights...
+self played : 57
+self played : 58
+self played : 59
+self played : 60
+self played : 61
+self played : 62
+self played : 63
+self played : 64
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 9]
+Evaluating Candidate Weights...
+self played : 65
+self played : 66
+self played : 67
+self played : 68
+self played : 69
+self played : 70
+self played : 71
+self played : 72
+Results -> Candidate Wins: 3 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 10]
+Evaluating Candidate Weights...
+self played : 73
+self played : 74
+self played : 75
+self played : 76
+self played : 77
+self played : 78
+self played : 79
+self played : 80
+Results -> Candidate Wins: 4 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5000
+
+[Generation 11]
+Evaluating Candidate Weights...
+self played : 81
+self played : 82
+self played : 83
+self played : 84
+self played : 85
+self played : 86
+self played : 87
+self played : 88
+Results -> Candidate Wins: 2 | Best Wins: 6
+❌ Candidate was weaker. Reverting.
+
+[Generation 12]
+Evaluating Candidate Weights...
+self played : 89
+self played : 90
+self played : 91
+self played : 92
+self played : 93
+self played : 94
+self played : 95
+self played : 96
+Results -> Candidate Wins: 4 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5000
+
+[Generation 13]
+Evaluating Candidate Weights...
+self played : 97
+self played : 98
+self played : 99
+self played : 100
+self played : 101
+self played : 102
+self played : 103
+self played : 104
+Results -> Candidate Wins: 6 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5200
+
+[Generation 14]
+Evaluating Candidate Weights...
+self played : 105
+self played : 106
+self played : 107
+self played : 108
+self played : 109
+self played : 110
+self played : 111
+self played : 112
+Results -> Candidate Wins: 2 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 15]
+Evaluating Candidate Weights...
+self played : 113
+self played : 114
+self played : 115
+self played : 116
+self played : 117
+self played : 118
+self played : 119
+self played : 120
+Results -> Candidate Wins: 5 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5200
+
+[Generation 16]
+Evaluating Candidate Weights...
+self played : 121
+self played : 122
+self played : 123
+self played : 124
+self played : 125
+self played : 126
+self played : 127
+self played : 128
+Results -> Candidate Wins: 2 | Best Wins: 6
+❌ Candidate was weaker. Reverting.
+
+[Generation 17]
+Evaluating Candidate Weights...
+self played : 129
+self played : 130
+self played : 131
+self played : 132
+self played : 133
+self played : 134
+self played : 135
+self played : 136
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 18]
+Evaluating Candidate Weights...
+self played : 137
+self played : 138
+self played : 139
+self played : 140
+self played : 141
+self played : 142
+self played : 143
+self played : 144
+Results -> Candidate Wins: 7 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5979
+
+[Generation 19]
+Evaluating Candidate Weights...
+self played : 145
+self played : 146
+self played : 147
+self played : 148
+self played : 149
+self played : 150
+self played : 151
+self played : 152
+Results -> Candidate Wins: 6 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5979
+
+[Generation 20]
+Evaluating Candidate Weights...
+self played : 153
+self played : 154
+self played : 155
+self played : 156
+self played : 157
+self played : 158
+self played : 159
+self played : 160
+Results -> Candidate Wins: 6 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5979
+
+[Generation 21]
+Evaluating Candidate Weights...
+self played : 161
+self played : 162
+self played : 163
+self played : 164
+self played : 165
+self played : 166
+self played : 167
+self played : 168
+Results -> Candidate Wins: 5 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5500
+
+[Generation 22]
+Evaluating Candidate Weights...
+self played : 169
+self played : 170
+self played : 171
+self played : 172
+self played : 173
+self played : 174
+self played : 175
+self played : 176
+Results -> Candidate Wins: 2 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 23]
+Evaluating Candidate Weights...
+self played : 177
+self played : 178
+self played : 179
+self played : 180
+self played : 181
+self played : 182
+self played : 183
+self played : 184
+Results -> Candidate Wins: 2 | Best Wins: 6
+❌ Candidate was weaker. Reverting.
+
+[Generation 24]
+Evaluating Candidate Weights...
+self played : 185
+self played : 186
+self played : 187
+self played : 188
+self played : 189
+self played : 190
+self played : 191
+self played : 192
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 25]
+Evaluating Candidate Weights...
+self played : 193
+self played : 194
+self played : 195
+self played : 196
+self played : 197
+self played : 198
+self played : 199
+self played : 200
+Results -> Candidate Wins: 1 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 26]
+Evaluating Candidate Weights...
+self played : 201
+self played : 202
+self played : 203
+self played : 204
+self played : 205
+self played : 206
+self played : 207
+self played : 208
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 27]
+Evaluating Candidate Weights...
+self played : 209
+self played : 210
+self played : 211
+self played : 212
+self played : 213
+self played : 214
+self played : 215
+self played : 216
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 28]
+Evaluating Candidate Weights...
+self played : 217
+self played : 218
+self played : 219
+self played : 220
+self played : 221
+self played : 222
+self played : 223
+self played : 224
+Results -> Candidate Wins: 0 | Best Wins: 8
+❌ Candidate was weaker. Reverting.
+
+[Generation 29]
+Evaluating Candidate Weights...
+self played : 225
+self played : 226
+self played : 227
+self played : 228
+self played : 229
+self played : 230
+self played : 231
+self played : 232
+Results -> Candidate Wins: 1 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 30]
+Evaluating Candidate Weights...
+self played : 233
+self played : 234
+self played : 235
+self played : 236
+self played : 237
+self played : 238
+self played : 239
+self played : 240
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 31]
+Evaluating Candidate Weights...
+self played : 241
+self played : 242
+self played : 243
+self played : 244
+self played : 245
+self played : 246
+self played : 247
+self played : 248
+Results -> Candidate Wins: 6 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5500
+
+[Generation 32]
+Evaluating Candidate Weights...
+self played : 249
+self played : 250
+self played : 251
+self played : 252
+self played : 253
+self played : 254
+self played : 255
+self played : 256
+Results -> Candidate Wins: 1 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 33]
+Evaluating Candidate Weights...
+self played : 257
+self played : 258
+self played : 259
+self played : 260
+self played : 261
+self played : 262
+self played : 263
+self played : 264
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 34]
+Evaluating Candidate Weights...
+self played : 265
+self played : 266
+self played : 267
+self played : 268
+self played : 269
+self played : 270
+self played : 271
+self played : 272
+Results -> Candidate Wins: 4 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5390
+
+[Generation 35]
+Evaluating Candidate Weights...
+self played : 273
+self played : 274
+self played : 275
+self played : 276
+self played : 277
+self played : 278
+self played : 279
+self played : 280
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 36]
+Evaluating Candidate Weights...
+self played : 281
+self played : 282
+self played : 283
+self played : 284
+self played : 285
+self played : 286
+self played : 287
+self played : 288
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 37]
+Evaluating Candidate Weights...
+self played : 289
+self played : 290
+self played : 291
+self played : 292
+self played : 293
+self played : 294
+self played : 295
+self played : 296
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 38]
+Evaluating Candidate Weights...
+self played : 297
+self played : 298
+self played : 299
+self played : 300
+self played : 301
+self played : 302
+self played : 303
+self played : 304
+Results -> Candidate Wins: 5 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5012
+
+[Generation 39]
+Evaluating Candidate Weights...
+self played : 305
+self played : 306
+self played : 307
+self played : 308
+self played : 309
+self played : 310
+self played : 311
+self played : 312
+Results -> Candidate Wins: 6 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5012
+
+[Generation 40]
+Evaluating Candidate Weights...
+self played : 313
+self played : 314
+self played : 315
+self played : 316
+self played : 317
+self played : 318
+self played : 319
+self played : 320
+Results -> Candidate Wins: 1 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 41]
+Evaluating Candidate Weights...
+self played : 321
+self played : 322
+self played : 323
+self played : 324
+self played : 325
+self played : 326
+self played : 327
+self played : 328
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 42]
+Evaluating Candidate Weights...
+self played : 329
+self played : 330
+self played : 331
+self played : 332
+self played : 333
+self played : 334
+self played : 335
+self played : 336
+Results -> Candidate Wins: 5 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5012
+
+[Generation 43]
+Evaluating Candidate Weights...
+self played : 337
+self played : 338
+self played : 339
+self played : 340
+self played : 341
+self played : 342
+self played : 343
+self played : 344
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 44]
+Evaluating Candidate Weights...
+self played : 345
+self played : 346
+self played : 347
+self played : 348
+self played : 349
+self played : 350
+self played : 351
+self played : 352
+Results -> Candidate Wins: 2 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 45]
+Evaluating Candidate Weights...
+self played : 353
+self played : 354
+self played : 355
+self played : 356
+self played : 357
+self played : 358
+self played : 359
+self played : 360
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 46]
+Evaluating Candidate Weights...
+self played : 361
+self played : 362
+self played : 363
+self played : 364
+self played : 365
+self played : 366
+self played : 367
+self played : 368
+Results -> Candidate Wins: 7 | Best Wins: 0
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5012
+
+[Generation 47]
+Evaluating Candidate Weights...
+self played : 369
+self played : 370
+self played : 371
+self played : 372
+self played : 373
+self played : 374
+self played : 375
+self played : 376
+Results -> Candidate Wins: 5 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    50000
+  OpenThree:   5012
+
+[Generation 48]
+Evaluating Candidate Weights...
+self played : 377
+self played : 378
+self played : 379
+self played : 380
+self played : 381
+self played : 382
+self played : 383
+self played : 384
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 49]
+Evaluating Candidate Weights...
+self played : 385
+self played : 386
+self played : 387
+self played : 388
+self played : 389
+self played : 390
+self played : 391
+self played : 392
+Results -> Candidate Wins: 1 | Best Wins: 6
+❌ Candidate was weaker. Reverting.
+
+[Generation 50]
+Evaluating Candidate Weights...
+self played : 393
+self played : 394
+self played : 395
+self played : 396
+self played : 397
+self played : 398
+self played : 399
+self played : 400
+Results -> Candidate Wins: 6 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42500
+  OpenThree:   5012
+
+[Generation 51]
+Evaluating Candidate Weights...
+self played : 401
+self played : 402
+self played : 403
+self played : 404
+self played : 405
+self played : 406
+self played : 407
+self played : 408
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 52]
+Evaluating Candidate Weights...
+self played : 409
+self played : 410
+self played : 411
+self played : 412
+self played : 413
+self played : 414
+self played : 415
+self played : 416
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 53]
+Evaluating Candidate Weights...
+self played : 417
+self played : 418
+self played : 419
+self played : 420
+self played : 421
+self played : 422
+self played : 423
+self played : 424
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 54]
+Evaluating Candidate Weights...
+self played : 425
+self played : 426
+self played : 427
+self played : 428
+self played : 429
+self played : 430
+self played : 431
+self played : 432
+Results -> Candidate Wins: 5 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    44200
+  OpenThree:   5012
+
+[Generation 55]
+Evaluating Candidate Weights...
+self played : 433
+self played : 434
+self played : 435
+self played : 436
+self played : 437
+self played : 438
+self played : 439
+self played : 440
+Results -> Candidate Wins: 5 | Best Wins: 2
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    44200
+  OpenThree:   5012
+
+[Generation 56]
+Evaluating Candidate Weights...
+self played : 441
+self played : 442
+self played : 443
+self played : 444
+self played : 445
+self played : 446
+self played : 447
+self played : 448
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 57]
+Evaluating Candidate Weights...
+self played : 449
+self played : 450
+self played : 451
+self played : 452
+self played : 453
+self played : 454
+self played : 455
+self played : 456
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 58]
+Evaluating Candidate Weights...
+self played : 457
+self played : 458
+self played : 459
+self played : 460
+self played : 461
+self played : 462
+self played : 463
+self played : 464
+Results -> Candidate Wins: 1 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 59]
+Evaluating Candidate Weights...
+self played : 465
+self played : 466
+self played : 467
+self played : 468
+self played : 469
+self played : 470
+self played : 471
+self played : 472
+Results -> Candidate Wins: 0 | Best Wins: 8
+❌ Candidate was weaker. Reverting.
+
+[Generation 60]
+Evaluating Candidate Weights...
+self played : 473
+self played : 474
+self played : 475
+self played : 476
+self played : 477
+self played : 478
+self played : 479
+self played : 480
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 61]
+Evaluating Candidate Weights...
+self played : 481
+self played : 482
+self played : 483
+self played : 484
+self played : 485
+self played : 486
+self played : 487
+self played : 488
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 62]
+Evaluating Candidate Weights...
+self played : 489
+self played : 490
+self played : 491
+self played : 492
+self played : 493
+self played : 494
+self played : 495
+self played : 496
+Results -> Candidate Wins: 7 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    44200
+  OpenThree:   5012
+
+[Generation 63]
+Evaluating Candidate Weights...
+self played : 497
+self played : 498
+self played : 499
+self played : 500
+self played : 501
+self played : 502
+self played : 503
+self played : 504
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 64]
+Evaluating Candidate Weights...
+self played : 505
+self played : 506
+self played : 507
+self played : 508
+self played : 509
+self played : 510
+self played : 511
+self played : 512
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 65]
+Evaluating Candidate Weights...
+self played : 513
+self played : 514
+self played : 515
+self played : 516
+self played : 517
+self played : 518
+self played : 519
+self played : 520
+Results -> Candidate Wins: 3 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 66]
+Evaluating Candidate Weights...
+self played : 521
+self played : 522
+self played : 523
+self played : 524
+self played : 525
+self played : 526
+self played : 527
+self played : 528
+Results -> Candidate Wins: 0 | Best Wins: 5
+❌ Candidate was weaker. Reverting.
+
+[Generation 67]
+Evaluating Candidate Weights...
+self played : 529
+self played : 530
+self played : 531
+self played : 532
+self played : 533
+self played : 534
+self played : 535
+self played : 536
+Results -> Candidate Wins: 5 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    44200
+  OpenThree:   5012
+
+[Generation 68]
+Evaluating Candidate Weights...
+self played : 537
+self played : 538
+self played : 539
+self played : 540
+self played : 541
+self played : 542
+self played : 543
+self played : 544
+Results -> Candidate Wins: 5 | Best Wins: 3
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42874
+  OpenThree:   5012
+
+[Generation 69]
+Evaluating Candidate Weights...
+self played : 545
+self played : 546
+self played : 547
+self played : 548
+self played : 549
+self played : 550
+self played : 551
+self played : 552
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 70]
+Evaluating Candidate Weights...
+self played : 553
+self played : 554
+self played : 555
+self played : 556
+self played : 557
+self played : 558
+self played : 559
+self played : 560
+Results -> Candidate Wins: 1 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 71]
+Evaluating Candidate Weights...
+self played : 561
+self played : 562
+self played : 563
+self played : 564
+self played : 565
+self played : 566
+self played : 567
+self played : 568
+Results -> Candidate Wins: 0 | Best Wins: 8
+❌ Candidate was weaker. Reverting.
+
+[Generation 72]
+Evaluating Candidate Weights...
+self played : 569
+self played : 570
+self played : 571
+self played : 572
+self played : 573
+self played : 574
+self played : 575
+self played : 576
+Results -> Candidate Wins: 1 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 73]
+Evaluating Candidate Weights...
+self played : 577
+self played : 578
+self played : 579
+self played : 580
+self played : 581
+self played : 582
+self played : 583
+self played : 584
+Results -> Candidate Wins: 0 | Best Wins: 7
+❌ Candidate was weaker. Reverting.
+
+[Generation 74]
+Evaluating Candidate Weights...
+self played : 585
+self played : 586
+self played : 587
+self played : 588
+self played : 589
+self played : 590
+self played : 591
+self played : 592
+Results -> Candidate Wins: 0 | Best Wins: 8
+❌ Candidate was weaker. Reverting.
+
+[Generation 75]
+Evaluating Candidate Weights...
+self played : 593
+self played : 594
+self played : 595
+self played : 596
+self played : 597
+self played : 598
+self played : 599
+self played : 600
+Results -> Candidate Wins: 0 | Best Wins: 8
+❌ Candidate was weaker. Reverting.
+
+[Generation 76]
+Evaluating Candidate Weights...
+self played : 601
+self played : 602
+self played : 603
+self played : 604
+self played : 605
+self played : 606
+self played : 607
+self played : 608
+Results -> Candidate Wins: 0 | Best Wins: 8
+❌ Candidate was weaker. Reverting.
+
+[Generation 77]
+Evaluating Candidate Weights...
+self played : 609
+self played : 610
+self played : 611
+self played : 612
+self played : 613
+self played : 614
+self played : 615
+self played : 616
+Results -> Candidate Wins: 8 | Best Wins: 0
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42874
+  OpenThree:   4861
+
+[Generation 78]
+Evaluating Candidate Weights...
+self played : 617
+self played : 618
+self played : 619
+self played : 620
+self played : 621
+self played : 622
+self played : 623
+self played : 624
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 79]
+Evaluating Candidate Weights...
+self played : 625
+self played : 626
+self played : 627
+self played : 628
+self played : 629
+self played : 630
+self played : 631
+self played : 632
+Results -> Candidate Wins: 7 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42874
+  OpenThree:   4861
+
+[Generation 80]
+Evaluating Candidate Weights...
+self played : 633
+self played : 634
+self played : 635
+self played : 636
+self played : 637
+self played : 638
+self played : 639
+self played : 640
+Results -> Candidate Wins: 6 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42874
+  OpenThree:   4861
+
+[Generation 81]
+Evaluating Candidate Weights...
+self played : 641
+self played : 642
+self played : 643
+self played : 644
+self played : 645
+self played : 646
+self played : 647
+self played : 648
+Results -> Candidate Wins: 8 | Best Wins: 0
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42874
+  OpenThree:   4861
+
+[Generation 82]
+Evaluating Candidate Weights...
+self played : 649
+self played : 650
+self played : 651
+self played : 652
+self played : 653
+self played : 654
+self played : 655
+self played : 656
+Results -> Candidate Wins: 8 | Best Wins: 0
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42874
+  OpenThree:   4861
+
+[Generation 83]
+Evaluating Candidate Weights...
+self played : 657
+self played : 658
+self played : 659
+self played : 660
+self played : 661
+self played : 662
+self played : 663
+self played : 664
+Results -> Candidate Wins: 4 | Best Wins: 4
+❌ Candidate was weaker. Reverting.
+
+[Generation 84]
+Evaluating Candidate Weights...
+self played : 665
+self played : 666
+self played : 667
+self played : 668
+self played : 669
+self played : 670
+self played : 671
+self played : 672
+Results -> Candidate Wins: 7 | Best Wins: 1
+🎉 NEW BEST WEIGHTS FOUND! Saving...
+  OpenFour:    42874
+  OpenThree:   4861
+
+[Generation 85]
+Evaluating Candidate Weights...
+self played : 673
+self played : 674
+self played : 675
+self played : 676
+                  

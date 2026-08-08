@@ -1,0 +1,7 @@
+openFour 42874
+blockedFour 10089
+openThree 4861
+blockedThree 734
+openTwo 547
+blockedTwo 119
+singlePiece 6

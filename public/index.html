@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stockcaro AI Gomoku — Play against a powerful AI engine. Features Elo rating, self-play, and configurable board sizes.">
+    <title>Stockcaro AI Gomoku</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(22, 30, 49, 0.7);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --accent: #00d2ff;
+            --accent-glow: rgba(0, 210, 255, 0.35);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --green: #22c55e;
+            --red: #ef4444;
+            --board-wood: #e2b062;
+            --board-lines: #5d431f;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+        body { min-height: 100vh; background: radial-gradient(circle at 50% 0%, #151d30 0%, #0b0f19 70%); color: var(--text-main); display: flex; flex-direction: column; align-items: center; padding: 30px 20px; }
+        header { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
+        header svg { width: 38px; height: 38px; fill: var(--accent); filter: drop-shadow(0 0 8px var(--accent-glow)); }
+        header h1 { font-size: 28px; font-weight: 800; letter-spacing: 1px; background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .app-container { display: flex; gap: 30px; max-width: 1000px; width: 100%; justify-content: center; align-items: stretch; }
+        @media (max-width: 900px) { .app-container { flex-direction: column; align-items: center; } }
+        .game-area { display: flex; gap: 15px; background: var(--panel-bg); border: 1px solid var(--panel-border); padding: 16px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); backdrop-filter: blur(10px); }
+        .eval-bar-container { width: 24px; background: var(--red); border-radius: 6px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+        .eval-bar-fill { width: 100%; height: 50%; background: var(--green); transition: height 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .eval-score-label { position: absolute; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8); pointer-events: none; z-index: 2; }
+        .eval-score-label.top { top: 6px; }
+        .eval-score-label.bottom { bottom: 6px; }
+        .board-canvas-wrapper { position: relative; }
+        canvas { display: block; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 3px rgba(94,67,31,0.6); }
+        .sidebar { width: 320px; display: flex; flex-direction: column; gap: 20px; }
+        .panel { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
+        .panel-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .panel-title svg { width: 16px; height: 16px; fill: var(--accent); }
+        .settings-grid { display: flex; flex-direction: column; gap: 12px; }
+        .input-group { display: flex; flex-direction: column; gap: 6px; }
+        .input-group label { font-size: 12px; font-weight: 500; color: var(--text-muted); }
+        .input-group select, .input-group input { width: 100%; background: #0f1524; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; padding: 10px 12px; font-size: 13px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .input-group select:focus, .input-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .legend-row { display: flex; justify-content: space-between; background: rgba(0,0,0,0.25); padding: 10px 14px; border-radius: 8px; margin-top: 5px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; }
+        .stone-preview { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset -2px -2px 4px rgba(0,0,0,0.4), 1px 1px 3px rgba(0,0,0,0.5); }
+        .stone-preview.x { background: radial-gradient(circle at 35% 35%, #86efac, #22c55e 50%, #14532d); }
+        .stone-preview.o { background: radial-gradient(circle at 35% 35%, #fca5a5, #ef4444 50%, #7f1d1d); }
+        .button-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        button { width: 100%; padding: 12px; border-radius: 10px; border: none; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
+        button svg { width: 16px; height: 16px; }
+        .btn-primary { background: linear-gradient(135deg, #00d2ff 0%, #00a8ff 100%); color: #0b0f19; box-shadow: 0 4px 15px rgba(0,210,255,0.3); }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,210,255,0.45); }
+        .btn-secondary { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+        .stats-list { display: flex; flex-direction: column; gap: 10px; }
+        .stat-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+        .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .stat-label { color: var(--text-muted); }
+        .stat-value { font-weight: 600; }
+        .status-badge { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-playing { background: rgba(0,210,255,0.15); color: var(--accent); }
+        .badge-thinking { background: rgba(239,68,68,0.15); color: var(--red); animation: pulse 1.5s infinite; }
+        .badge-ready { background: rgba(34,197,94,0.15); color: var(--green); }
+        .badge-win { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+    </style>
+</head>
+<body>
+<header>
+    <svg viewBox="0 0 24 24"><path d="M19 19H5V5h14v14zM9 3H7v2h2V3zm4 0h-2v2h2V3zm4 0h-2v2h2V3zM9 19H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zM3 9H1v2h2V9zm0 4H1v2h2v-2zm0-8H1v2h2V5zm18 4h2v2h-2V9zm0 4h2v-2h-2v2zm0-8h2v2h-2V5zM7 7h10v10H7V7zm2 2v6h6V9H9z"/></svg>
+    <h1>STOCKCARO AI</h1>
+</header>
+<div class="app-container">
+    <div class="game-area">
+        <div class="eval-bar-container">
+            <span class="eval-score-label top" id="evalScoreTop">+0.0</span>
+            <div class="eval-bar-fill" id="evalBarFill"></div>
+            <span class="eval-score-label bottom" id="evalScoreBottom"></span>
+        </div>
+        <div class="board-canvas-wrapper">
+            <canvas id="boardCanvas"></canvas>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="panel">
+            <div class="panel-title">
+                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                Settings
+            </div>
+            <div class="settings-grid">
+                <div class="input-group">
+                    <label for="boardWidth">Board Size (Width)</label>
+                    <input type="number" id="boardWidth" value="19" min="3" max="32">
+                </div>
+                <div class="input-group">
+                    <label for="boardHeight">Board Size (Height)</label>
+                    <input type="number" id="boardHeight" value="19" min="3" max="32">
+                </div>
+                <div class="input-group">
+                    <label for="winLength">Winning Target (Length)</label>
+                    <input type="number" id="winLength" value="5" min="3" max="32">
+                </div>
+                <div class="input-group">
+                    <label for="gameMode">Game Mode</label>
+                    <select id="gameMode">
+                        <option value="humanVsAiO" selected>Human (X) vs AI (O)</option>
+                        <option value="humanVsAiX">AI (X) vs Human (O)</option>
+                        <option value="aiVsAi">AI vs AI (Self Play)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="difficulty">AI Difficulty (Skill)</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy (Elo 1000)</option>
+                        <option value="medium" selected>Medium (Elo 1400)</option>
+                        <option value="hard">Hard (Elo 1800)</option>
+                        <option value="expert">Expert (Elo 2200)</option>
+                        <option value="master">Master (Elo 2500)</option>
+                    </select>
+                </div>
+                <div class="legend-row">
+                    <div class="legend-item"><div class="stone-preview x"></div> X (Green)</div>
+                    <div class="legend-item"><div class="stone-preview o"></div> O (Red)</div>
+                </div>
+                <div class="button-group">
+                    <button id="startButton" class="btn-primary">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        Start New Game
+                    </button>
+                    <button id="undoButton" class="btn-secondary">
+                        <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+                        Undo Move
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-title">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                Player Profile &amp; Elo
+            </div>
+            <div class="stats-list">
+                <div class="stat-row">
+                    <span class="stat-label">Your Rating</span>
+                    <span class="stat-value" id="userElo" style="color:var(--accent);font-weight:800;font-size:16px;">1200</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Rank Class</span>
+                    <span class="stat-value" id="userRank" style="font-weight:700;color:#fff;">Novice</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Record (W / L / D)</span>
+                    <span class="stat-value" id="userRecord">0 - 0 - 0</span>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:10px;">
+                    <button id="resetStatsButton" class="btn-secondary" style="font-size:11px;padding:6px 10px;border-radius:6px;width:auto;flex:1;">Reset Profile</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-title">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                Dashboard
+            </div>
+            <div class="stats-list">
+                <div class="stat-row">
+                    <span class="stat-label">Game Status</span>
+                    <span class="status-badge badge-ready" id="badgeStatus">Ready</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Evaluation Score</span>
+                    <span class="stat-value" id="evalScore">0.0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">AI Search Depth</span>
+                    <span class="stat-value" id="searchDepth">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Last Move</span>
+                    <span class="stat-value" id="lastMoveInfo">—</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+// ─── Difficulty Configurations & Elo Mapping ──────────────────────────────────
+const DIFFICULTYCONFIG = {
+    easy:   { depth: 2,  timeLimit: 50,   elo: 1000 },
+    medium: { depth: 4,  timeLimit: 150,  elo: 1400 },
+    hard:   { depth: 6,  timeLimit: 450,  elo: 1800 },
+    expert: { depth: 9,  timeLimit: 1200, elo: 2200 },
+    master: { depth: 14, timeLimit: 3000, elo: 2500 }
+};
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let boardW = 19, boardH = 19, winLen = 5;
+let engineSide = "O", humanSide = "X";
+let currentTurn = "X";
+let moveHistory = [];
+// FIX #6: O(1) flat board lookup (0=Empty,1=X,2=O) replacing O(N) Array.find
+let boardState = null;
+let isThinking = false;
+let gameOver   = false;
+let winner     = null;
+// FIX #1: gameVersion — incremented on every startNewGame; async responses
+// capture it at call time and silently discard if the version changed.
+let gameVersion = 0;
+
+// Player Profile State
+let userRating = 1200;
+let userWins = 0, userLosses = 0, userDraws = 0;
+
+const canvas = document.getElementById("boardCanvas");
+const ctx    = canvas.getContext("2d");
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+const CANVASSIZE = 580;
+let cellW, cellH;
+
+function updateLayout() {
+    canvas.width  = CANVASSIZE;
+    canvas.height = CANVASSIZE;
+    cellW = CANVASSIZE / boardW;
+    cellH = CANVASSIZE / boardH;
+}
+
+function cellCenter(col, row) {
+    return { cx: (col + 0.5) * cellW, cy: (row + 0.5) * cellH };
+}
+
+// ─── Win Checker (O(1) boardState lookup) ────────────────────────────────────
+function checkWin(lastX, lastY, player) {
+    const p = player === "X" ? 1 : 2;
+    const dirs = [[1,0],[0,1],[1,1],[1,-1]];
+    for (const [dx, dy] of dirs) {
+        let count = 1;
+        let tx = lastX + dx, ty = lastY + dy;
+        while (tx >= 0 && tx < boardW && ty >= 0 && ty < boardH && boardState[ty * boardW + tx] === p) { count++; tx += dx; ty += dy; }
+        tx = lastX - dx; ty = lastY - dy;
+        while (tx >= 0 && tx < boardW && ty >= 0 && ty < boardH && boardState[ty * boardW + tx] === p) { count++; tx -= dx; ty -= dy; }
+        if (count >= winLen) return true;
+    }
+    return false;
+}
+
+// ─── Eval Bar ────────────────────────────────────────────────────────────────
+function updateEvalBar(rawScore) {
+    if (gameOver) return;
+    let scoreVal = parseFloat(rawScore);
+    if (isNaN(scoreVal)) scoreVal = 0;
+    const maxRange = 30000;
+    const pct = 50 + (Math.max(-maxRange, Math.min(maxRange, scoreVal)) / maxRange) * 50;
+    document.getElementById("evalBarFill").style.height = pct + "%";
+    let disp = (scoreVal / 1000).toFixed(1);
+    if (scoreVal > 0) disp = "+" + disp;
+    const top = document.getElementById("evalScoreTop");
+    const bot = document.getElementById("evalScoreBottom");
+    if (pct >= 50) { top.innerText = disp; bot.innerText = ""; }
+    else           { top.innerText = ""; bot.innerText = disp; }
+    document.getElementById("evalScore").innerText = disp;
+}
+
+// ─── Draw Board (wood + 3D stones) ───────────────────────────────────────────
+function drawBoard() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // FIX #4/#13: Wood background using CSS variable values (was white)
+    ctx.fillStyle = "#e2b062"; // --board-wood
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // FIX #4/#13: Dark brown grid lines (was black)
+    ctx.strokeStyle = "#5d431f"; // --board-lines
+    ctx.lineWidth   = 1;
+    for (let i = 0; i <= boardW; i++) {
+        const x = Math.round(i * cellW);
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+    }
+    for (let j = 0; j <= boardH; j++) {
+        const y = Math.round(j * cellH);
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+    }
+
+    // FIX #5: 3D stones with radial gradient, drop shadow, specular gloss
+    const radius = Math.min(cellW, cellH) * 0.42;
+    for (let i = 0; i < moveHistory.length; i++) {
+        const m = moveHistory[i];
+        const { cx, cy } = cellCenter(m.x, m.y);
+        const isX = m.player === "X";
+
+        // Drop shadow
+        ctx.save();
+        ctx.shadowColor   = "rgba(0,0,0,0.55)";
+        ctx.shadowBlur    = radius * 0.6;
+        ctx.shadowOffsetX = radius * 0.12;
+        ctx.shadowOffsetY = radius * 0.18;
+
+        // Radial gradient for 3D sphere illusion
+        const grad = ctx.createRadialGradient(
+            cx - radius * 0.3, cy - radius * 0.3, radius * 0.05,
+            cx, cy, radius
+        );
+        if (isX) {
+            grad.addColorStop(0,   "#a7f3d0");
+            grad.addColorStop(0.4, "#22c55e");
+            grad.addColorStop(1,   "#14532d");
+        } else {
+            grad.addColorStop(0,   "#fecaca");
+            grad.addColorStop(0.4, "#ef4444");
+            grad.addColorStop(1,   "#7f1d1d");
+        }
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.restore();
+
+        // Specular gloss overlay
+        const gloss = ctx.createRadialGradient(
+            cx - radius * 0.35, cy - radius * 0.38, 0,
+            cx - radius * 0.15, cy - radius * 0.15, radius * 0.65
+        );
+        gloss.addColorStop(0, "rgba(255,255,255,0.42)");
+        gloss.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = gloss;
+        ctx.fill();
+
+        // Symbol inside stone
+        ctx.lineCap = "round"; ctx.lineJoin = "round";
+        if (isX) {
+            const arm = radius * 0.34;
+            ctx.strokeStyle = "rgba(255,255,255,0.88)";
+            ctx.lineWidth   = Math.max(1.5, radius * 0.16);
+            ctx.beginPath();
+            ctx.moveTo(cx - arm, cy - arm); ctx.lineTo(cx + arm, cy + arm);
+            ctx.moveTo(cx + arm, cy - arm); ctx.lineTo(cx - arm, cy + arm);
+            ctx.stroke();
+        } else {
+            ctx.strokeStyle = "rgba(255,255,255,0.88)";
+            ctx.lineWidth   = Math.max(1.5, radius * 0.14);
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius * 0.4, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        // Gold ring for latest move
+        if (i === moveHistory.length - 1) {
+            ctx.strokeStyle = "#eab308";
+            ctx.lineWidth   = 2.5;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius + 2.5, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+    }
+
+    // Game-over overlay
+    if (gameOver && winner) {
+        ctx.fillStyle = "rgba(11,15,25,0.65)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle    = "#ffffff";
+        ctx.font         = "bold 50px 'Inter', sans-serif";
+        ctx.textAlign    = "center";
+        ctx.textBaseline = "middle";
+        ctx.shadowColor  = "rgba(0,0,0,0.8)";
+        ctx.shadowBlur   = 10;
+        ctx.fillText(winner === "Draw" ? "DRAW GAME" : "WIN: " + winner, canvas.width / 2, canvas.height / 2);
+        ctx.shadowBlur = 0;
+    }
+}
+
+// ─── Elo Profile ─────────────────────────────────────────────────────────────
+function loadProfile() {
+    const sr = localStorage.getItem("stockcaroUserRating");
+    const sw = localStorage.getItem("stockcaroUserWins");
+    const sl = localStorage.getItem("stockcaroUserLosses");
+    const sd = localStorage.getItem("stockcaroUserDraws");
+    if (sr !== null) userRating  = parseInt(sr, 10);
+    if (sw !== null) userWins    = parseInt(sw, 10);
+    if (sl !== null) userLosses  = parseInt(sl, 10);
+    if (sd !== null) userDraws   = parseInt(sd, 10);
+    renderProfile();
+}
+
+function saveProfile() {
+    localStorage.setItem("stockcaroUserRating",  userRating);
+    localStorage.setItem("stockcaroUserWins",    userWins);
+    localStorage.setItem("stockcaroUserLosses",  userLosses);
+    localStorage.setItem("stockcaroUserDraws",   userDraws);
+}
+
+function getRankClass(elo) {
+    if (elo < 1200) return "Novice";
+    if (elo < 1400) return "Apprentice";
+    if (elo < 1600) return "Intermediate";
+    if (elo < 1800) return "Expert";
+    if (elo < 2000) return "Master";
+    if (elo < 2200) return "Grandmaster";
+    if (elo < 2400) return "Super Grandmaster";
+    return "Stockcaro Slayer";
+}
+
+function renderProfile() {
+    document.getElementById("userElo").innerText    = userRating;
+    document.getElementById("userRank").innerText   = getRankClass(userRating);
+    document.getElementById("userRecord").innerText = userWins + " - " + userLosses + " - " + userDraws;
+}
+
+function resetProfile() {
+    if (confirm("Are you sure you want to reset your profile and Elo rating?")) {
+        userRating = 1200; userWins = 0; userLosses = 0; userDraws = 0;
+        saveProfile(); renderProfile();
+        showNotification("Profile statistics have been reset!");
+    }
+}
+
+function updateEloRating(outcome) {
+    const gameMode = document.getElementById("gameMode").value;
+    if (gameMode === "aiVsAi") return;
+    const aiRating = DIFFICULTYCONFIG[document.getElementById("difficulty").value].elo;
+    const expected = 1 / (1 + Math.pow(10, (aiRating - userRating) / 400));
+    let actual = 0.5;
+    if (outcome === "win")  { actual = 1; userWins++;   }
+    else if (outcome === "loss") { actual = 0; userLosses++; }
+    else                         { userDraws++; }
+    const diff = Math.round(32 * (actual - expected));
+    userRating += diff;
+    saveProfile(); renderProfile();
+    // diff and color are trusted internal values — not user-controlled
+    const sign  = diff >= 0 ? "+" : "";
+    const color = diff >= 0 ? "var(--green)" : "var(--red)";
+    showNotification("Elo updated: <span style=\"color:" + color + ";font-weight:bold;\">" + sign + diff + "</span> (New Elo: " + userRating + ")");
+}
+
+// ─── Toast Notification ───────────────────────────────────────────────────────
+function showNotification(htmlContent) {
+    let container = document.getElementById("notification-container");
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "notification-container";
+        container.style.cssText = "position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;";
+        document.body.appendChild(container);
+    }
+    if (!document.getElementById("toast-styles")) {
+        const s = document.createElement("style");
+        s.id = "toast-styles";
+        s.textContent = "@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}@keyframes fadeOut{from{opacity:1}to{opacity:0}}";
+        document.head.appendChild(s);
+    }
+    const toast = document.createElement("div");
+    toast.style.cssText = "background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.08);border-left:4px solid var(--accent);color:var(--text-main);padding:12px 20px;border-radius:8px;font-size:13px;box-shadow:0 10px 25px rgba(0,0,0,0.5);backdrop-filter:blur(8px);animation:slideIn 0.3s ease-out forwards;font-family:'Inter',sans-serif;";
+    toast.innerHTML = htmlContent; // htmlContent is always from trusted internal strings
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.animation = "fadeOut 0.5s ease-out forwards";
+        setTimeout(() => toast.remove(), 500);
+    }, 4000);
+}
+
+// ─── Start New Game ───────────────────────────────────────────────────────────
+function startNewGame() {
+    // FIX #10: isNaN check instead of || fallback — prevents swallowing explicit 0
+    const wRaw = parseInt(document.getElementById("boardWidth").value,  10);
+    const hRaw = parseInt(document.getElementById("boardHeight").value, 10);
+    const lRaw = parseInt(document.getElementById("winLength").value,   10);
+    const wVal = isNaN(wRaw) ? 19 : wRaw;
+    const hVal = isNaN(hRaw) ? 19 : hRaw;
+    const lVal = isNaN(lRaw) ? 5  : lRaw;
+
+    if (wVal < 3 || wVal > 32 || hVal < 3 || hVal > 32) {
+        alert("Board dimensions must be between 3x3 and 32x32!"); return;
+    }
+    if (lVal < 3) { alert("Winning target must be at least 3!"); return; }
+    if (lVal > wVal || lVal > hVal) {
+        alert("Winning target (" + lVal + ") cannot be larger than board dimensions (" + wVal + "x" + hVal + ")!");
+        return;
+    }
+
+    boardW = wVal; boardH = hVal; winLen = lVal;
+
+    // FIX #8: Keep win-length max dynamically in sync with board dimensions
+    document.getElementById("winLength").max = Math.min(boardW, boardH);
+
+    // FIX #6: Fresh O(1) board state array for new game
+    boardState = new Uint8Array(boardW * boardH);
+
+    const gameMode = document.getElementById("gameMode").value;
+    if (gameMode === "humanVsAiO")    { engineSide = "O"; humanSide = "X"; }
+    else if (gameMode === "humanVsAiX") { engineSide = "X"; humanSide = "O"; }
+    else                                   { engineSide = "BOTH"; humanSide = "NONE"; }
+
+    moveHistory = []; currentTurn = "X"; isThinking = false; gameOver = false; winner = null;
+
+    // FIX #1: Increment version — any in-flight fetch from previous game will see
+    // myVersion !== gameVersion and discard its result without touching new state.
+    gameVersion++;
+
+    updateLayout();
+
+    const badge = document.getElementById("badgeStatus");
+    badge.innerText = "PLAYING"; badge.className = "status-badge badge-playing";
+    document.getElementById("evalScore").innerText    = "0.0";
+    document.getElementById("searchDepth").innerText  = "—";
+    document.getElementById("lastMoveInfo").innerText = "—";
+    updateEvalBar(0); drawBoard();
+
+    if (engineSide === "X" || engineSide === "BOTH") triggerEngineMove();
+}
+
+// ─── Engine Call ─────────────────────────────────────────────────────────────
+async function triggerEngineMove() {
+    if (gameOver) return;
+    isThinking = true;
+
+    // FIX #1: Snapshot version so stale responses are discarded
+    const myVersion = gameVersion;
+
+    const badge = document.getElementById("badgeStatus");
+    badge.innerText = "THINKING"; badge.className = "status-badge badge-thinking";
+
+    const activeCpu = currentTurn;
+    const config    = DIFFICULTYCONFIG[document.getElementById("difficulty").value] || DIFFICULTYCONFIG.medium;
+
+    // FIX #3: Track whether we should schedule the next AI-vs-AI move
+    let scheduleNext = false;
+
+    try {
+        const res  = await fetch("/api/move", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ width: boardW, height: boardH, win: winLen, engine: activeCpu, moves: moveHistory, depth: config.depth, timeLimit: config.timeLimit })
+        });
+        const data = await res.json();
+
+        // FIX #1: Bail out if game was restarted while this request was in-flight
+        if (myVersion !== gameVersion) return;
+
+        if (data.bestMove && data.bestMove.x >= 0 && data.bestMove.y >= 0) {
+            const bx = data.bestMove.x, by = data.bestMove.y;
+            moveHistory.push({ x: bx, y: by, player: activeCpu });
+            // FIX #6: Update O(1) board state
+            boardState[by * boardW + bx] = activeCpu === "X" ? 1 : 2;
+
+            if (checkWin(bx, by, activeCpu)) {
+                gameOver = true; winner = activeCpu;
+                badge.innerText = "WIN: " + activeCpu; badge.className = "status-badge badge-win";
+                updateEvalBar(activeCpu === "X" ? 999999 : -999999);
+                updateEloRating("loss");
+                return; // finally runs: isThinking=false + drawBoard()
+            }
+            if (moveHistory.length === boardW * boardH) {
+                gameOver = true; winner = "Draw";
+                badge.innerText = "DRAW GAME"; badge.className = "status-badge badge-win";
+                updateEloRating("draw");
+                return; // finally runs
+            }
+
+            document.getElementById("searchDepth").innerText  = data.depth;
+            document.getElementById("lastMoveInfo").innerText = "(" + bx + ", " + by + ")";
+            updateEvalBar(data.score);
+            currentTurn = activeCpu === "X" ? "O" : "X";
+
+            if (document.getElementById("gameMode").value === "aiVsAi") {
+                badge.innerText = "SELF PLAYING"; badge.className = "status-badge badge-playing";
+                scheduleNext = true; // setTimeout fires after finally clears isThinking
+            } else {
+                badge.innerText = "YOUR TURN"; badge.className = "status-badge badge-playing";
+            }
+        } else {
+            // FIX #3: Engine returned no valid move — surface error, don't freeze
+            badge.innerText = "NO MOVE"; badge.className = "status-badge badge-thinking";
+        }
+    } catch (e) {
+        if (myVersion !== gameVersion) return; // discard stale error
+        badge.innerText = "ERROR"; badge.className = "status-badge badge-thinking";
+    } finally {
+        // FIX #2: Always clear isThinking — was gated on gameMode, causing freeze
+        isThinking = false;
+        // FIX #7: Single authoritative drawBoard() here; all duplicates removed
+        drawBoard();
+        // FIX #3: Schedule next aiVsAi move after state is clean
+        if (scheduleNext && !gameOver) setTimeout(triggerEngineMove, 500);
+    }
+}
+
+// ─── Human Click ─────────────────────────────────────────────────────────────
+canvas.addEventListener("click", function(e) {
+    const gameMode = document.getElementById("gameMode").value;
+    // FIX #12: Removed redundant currentTurn !== humanSide before gameMode check
+    // (humanSide="NONE" in aiVsAi so the check was always true — not the intent)
+    if (gameOver || isThinking || gameMode === "aiVsAi") return;
+    if (currentTurn !== humanSide) return;
+
+    const rect  = canvas.getBoundingClientRect();
+    const scale = canvas.width / rect.width;
+    const col   = Math.floor(((e.clientX - rect.left) * scale) / cellW);
+    const row   = Math.floor(((e.clientY - rect.top)  * scale) / cellH);
+
+    if (col < 0 || col >= boardW || row < 0 || row >= boardH) return;
+    // FIX #6: O(1) occupancy check instead of Array.some O(N)
+    if (boardState[row * boardW + col] !== 0) return;
+
+    moveHistory.push({ x: col, y: row, player: humanSide });
+    boardState[row * boardW + col] = humanSide === "X" ? 1 : 2;
+
+    if (checkWin(col, row, humanSide)) {
+        gameOver = true; winner = humanSide;
+        const badge = document.getElementById("badgeStatus");
+        badge.innerText = "WIN: " + humanSide; badge.className = "status-badge badge-win";
+        updateEvalBar(humanSide === "X" ? 999999 : -999999);
+        drawBoard(); updateEloRating("win"); return;
+    }
+    if (moveHistory.length === boardW * boardH) {
+        gameOver = true; winner = "Draw";
+        const badge = document.getElementById("badgeStatus");
+        badge.innerText = "DRAW GAME"; badge.className = "status-badge badge-win";
+        drawBoard(); updateEloRating("draw"); return;
+    }
+    currentTurn = engineSide;
+    drawBoard(); triggerEngineMove();
+});
+
+// ─── Undo ─────────────────────────────────────────────────────────────────────
+document.getElementById("undoButton").addEventListener("click", function() {
+    const gameMode = document.getElementById("gameMode").value;
+    if (isThinking || gameMode === "aiVsAi") return;
+    if (moveHistory.length === 0) return;
+
+    if (gameOver) { gameOver = false; winner = null; }
+
+    // FIX #6: Keep boardState in sync when undoing moves
+    let m = moveHistory.pop();
+    boardState[m.y * boardW + m.x] = 0;
+    if (moveHistory.length > 0 && moveHistory[moveHistory.length - 1].player === engineSide) {
+        m = moveHistory.pop();
+        boardState[m.y * boardW + m.x] = 0;
+    }
+    currentTurn = humanSide;
+
+    const badge = document.getElementById("badgeStatus");
+    badge.innerText = "YOUR TURN"; badge.className = "status-badge badge-playing";
+    updateEvalBar(0); drawBoard();
+});
+
+document.getElementById("startButton").addEventListener("click", startNewGame);
+document.getElementById("resetStatsButton").addEventListener("click", resetProfile);
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+loadProfile();
+startNewGame();
+</script>
+</body>
+</html>
