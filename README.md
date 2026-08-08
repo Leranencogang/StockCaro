@@ -28,6 +28,7 @@ bash setup.sh
 ```
 ``` bash
 doubleclick setup.bat
+scroll to below
 ```
 
 Once completed, open your browser and navigate to: **[http://localhost:3000](http://localhost:3000)**
