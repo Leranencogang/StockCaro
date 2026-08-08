@@ -1,3 +1,7 @@
+
+
+<img width="1280" height="640" alt="converted_image" src="https://github.com/user-attachments/assets/b164a70c-68b1-4e7b-8592-30a36dfbc25a" />
+
 # 🎮 Stockcaro AI Gomoku
 
 Stockcaro is a high-performance Gomoku (Caro) AI engine written in C++17, wrapped in a lightweight Node.js Express server, and styled with a sleek glassmorphic HTML5 frontend. It features an advanced alpha-beta search with PVS (Principal Variation Search), transposition tables, iterative deepening, dynamic move-list pruning, a dynamic Elo rating progression profile, and configurable skill tiers.
