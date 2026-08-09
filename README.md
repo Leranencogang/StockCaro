@@ -26,10 +26,14 @@ Compile the C++ engine and launch the Node.js server automatically using the set
 ```bash
 bash setup.sh
 ```
-``` bash
+# Window
+``` 
 doubleclick setup.bat
 scroll to below
 ```
+## Macos 🍎
+``` chmod +x setupMacos.sh
+./setupMacos.sh ```
 
 Once completed, open your browser and navigate to: **[http://localhost:3000](http://localhost:3000)**
 
