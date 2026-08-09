@@ -19,8 +19,11 @@ Stockcaro is a high-performance Gomoku (Caro) AI engine written in C++17, wrappe
 
 
 ## ⚡ Setup & Installation
+# Git
 ```git clone https://github.com/stockcaro-offical/StockCaro.git```
+# Cd
 ```cd ~/Downloads```
+# Cd
 ``` cd StockCaro/src```
 ### 🚀 Automatic Launch (Recommended)
 Compile the C++ engine and launch the Node.js server automatically using the setup script:
