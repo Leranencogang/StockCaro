@@ -17,12 +17,12 @@ Stockcaro is a high-performance Gomoku (Caro) AI engine written in C++17, wrappe
 * **`Makefile`**: Compilation commands targeting native performance using GCC `-O3` flags.
 * **`weights.txt`**: Hyperparameters defining positional rewards and threat patterns.
 
----
 
 ## ⚡ Setup & Installation
 
 ### 🚀 Automatic Launch (Recommended)
 Compile the C++ engine and launch the Node.js server automatically using the setup script:
+# Linux
 ```bash
 bash setup.sh
 ```
@@ -31,9 +31,11 @@ bash setup.sh
 doubleclick setup.bat
 scroll to below
 ```
-## Macos 🍎
-``` chmod +x setupMacos.sh
-./setupMacos.sh ```
+# Macos
+
+chmod +x setupMacos.sh
+./setupMacos.sh 
+
 
 Once completed, open your browser and navigate to: **[http://localhost:3000](http://localhost:3000)**
 
